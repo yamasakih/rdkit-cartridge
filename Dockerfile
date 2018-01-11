@@ -30,10 +30,10 @@ ENV PYTHONPATH=$PYTHONPATH:$RDBASE
 
 RUN mkdir $RDBASE/build
 WORKDIR $RDBASE/build
-RUN cmake -DRDK_BUILD_INCHI_SUPPORT=ON -DRDK_BUILD_PGSQL=ON -DPostgreSQL_ROOT=/usr/lib/postgresql/10 -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/10/server ..
-RUN make
-RUN make install
-RUN sh Code/PgSQL/rdkit/pgsql_install.sh
+RUN cmake -DRDK_BUILD_INCHI_SUPPORT=ON -DRDK_BUILD_PGSQL=ON -DPostgreSQL_ROOT=/usr/lib/postgresql/10 -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/10/server .. \
+    && make \
+    && make install \
+    && sh Code/PgSQL/rdkit/pgsql_install.sh
 
 WORKDIR $RDBASE
 USER postgres
